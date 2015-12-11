@@ -12,7 +12,7 @@
 	module.directive('marvelCharacterInfo', function() {
 		return {
 			restrict: 'E',
-			templateUrl: 'app/common/directives/marvel-character.html',
+			templateUrl: 'app/common/directives/marvel-character-info/marvel-character-info.html',
 			bindToController: true,
 			scope: {
 				character: '='
