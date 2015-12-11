@@ -1,6 +1,5 @@
 <div ng-repeat="character in vm.characters">
-	<h3>{{character.name}}</h3>
-	<img ng-src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" style="width: 100px; height: auto;">
+	<marvel-character-info character="character"></marvel-character-info>
 	<hr/>
 </div>
 
