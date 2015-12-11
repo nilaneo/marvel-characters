@@ -12,12 +12,11 @@
 	   
 	</head>
 
-	<body ng-controller="charactersCtrl">
+	<body>
+		<div ng-controller="CharactersCtrl as charactersCtrl">
+			<marvel-characters characters="charactersCtrl.characters"></marvel-characters>
+		</div>
 
-		<pre>{{results | json}}</pre>
-
-		<marvel-character></marvel-character>
-		
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
 		<script src="app/marvel-characters.start.js"></script>	  	
 	</body>
