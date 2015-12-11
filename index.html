@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MarvelCharacters" ng-cloak>
+<html ng-app="MarvelCharactersApp" ng-cloak>
 	<head lang="en">
 	    <meta charset="UTF-8">
 	    <title>Marvel Characters</title>
@@ -13,11 +13,9 @@
 	</head>
 
 	<body>
-		<div ng-controller="CharactersCtrl as charactersCtrl">
-			<marvel-characters characters="charactersCtrl.characters"></marvel-characters>
-		</div>
+		<marvel-characters-app></marvel-characters-app>
 
 		<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
-		<script src="app/marvel-characters.start.js"></script>	  	
+		<script src="app/marvel-characters-app.js"></script>	  	
 	</body>
 </html>
