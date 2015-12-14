@@ -1,27 +1,33 @@
 (function () {
-	"use strict";
+    "use strict";
 
-	var module = angular.module('MarvelCharactersApp', [
-		'ngRoute',
-		'marvelApi',
-		'MarvelCharacterInfo'
-	]);
+    var module = angular.module('MarvelCharactersApp', [
+        'ngRoute',
+        'marvelApi',
+        'MarvelCharacterInfo'
+    ]);
 
-	module.config(function($routeProvider) {
-		$routeProvider
-			.when('/', {
-				controller: 'MarvelCharactersAppCtrl',
-				controllerAs: 'vm',
-				templateUrl: 'app/marvel-characters-app.html'
-			})
-			.otherwise('/');
-	});
+    module.config(function($routeProvider) {
+        $routeProvider
+            .when('/', {
+                controller: 'MarvelCharactersAppCtrl',
+                controllerAs: 'vm',
+                templateUrl: 'app/marvel-characters-app.html'
+            })
+            .otherwise('/');
+    });
 
-	module.controller('MarvelCharactersAppCtrl', function(marvelApi) {
-		var vm = this;
+    module.controller('MarvelCharactersAppCtrl', function(marvelApi) {
+        var vm = this;
 
-		marvelApi.getCharacters().then(function(characters) {
-	    	vm.characters = characters;
-	    });
-	});
+        marvelApi.getCharacters().then(function(characters) {
+            vm.characters = characters;
+        });
+
+        vm.searchCharacters = function() {
+            marvelApi.getCharacters(vm.searchRequest).then(function(characters){
+                vm.characters = characters;
+            });
+        }
+    });
 }());

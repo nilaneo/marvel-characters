@@ -1,5 +1,14 @@
-<div ng-repeat="character in vm.characters">
-	<marvel-character-info character="character"></marvel-character-info>
-	<hr/>
+<div>
+    <form name="searchForm" ng-submit="vm.searchCharacters()" novalidate>
+        <input type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" placeholder="Search for characters">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2 ng-if="vm.characters && !vm.characters.length">No search results.</h2>
+
+    <div id="search-results" ng-repeat="character in vm.characters">
+    	<marvel-character-info character="character"></marvel-character-info>
+    	<hr/>
+    </div>
 </div>
 
