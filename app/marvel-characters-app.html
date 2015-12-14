@@ -1,7 +1,9 @@
 <div>
-    <form name="searchForm" ng-submit="vm.searchCharacters()" novalidate>
-        <input type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" ng-model-options="{ debounce: 1000 }" placeholder="Search for characters">
-        <button type="submit">Search</button>
+    <form class="form-inline" name="searchForm" ng-submit="vm.searchCharacters()" novalidate>
+        <div class="form-group">
+            <input class="form-control" type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" ng-model-options="{ debounce: 1000 }" placeholder="Search for characters">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
     <h2 ng-if="vm.characters && !vm.characters.length">No search results.</h2>

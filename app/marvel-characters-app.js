@@ -2,6 +2,7 @@
     "use strict";
 
     var module = angular.module('MarvelCharactersApp', [
+        'ui.bootstrap',
         'ngRoute',
         'marvelApi',
         'MarvelCharacterInfo'
