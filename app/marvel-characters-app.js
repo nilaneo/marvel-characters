@@ -18,7 +18,7 @@
             .otherwise('/');
     });
 
-    module.controller('MarvelCharactersAppCtrl', function(marvelApi, $location) {
+    module.controller('MarvelCharactersAppCtrl', function(marvelApi, $location, $scope) {
         var vm = this;
 
         vm.searchRequest = $location.search().q;
@@ -31,7 +31,11 @@
             $location.search('q', vm.searchRequest);
         };
 
-        vm.searchCharacters();
+        $scope.$watch(function() {
+            return vm.searchRequest;
+        }, function() {
+            vm.searchCharacters();
+        });
 
     });
 }());

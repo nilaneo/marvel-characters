@@ -1,6 +1,6 @@
 <div>
     <form name="searchForm" ng-submit="vm.searchCharacters()" novalidate>
-        <input type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" placeholder="Search for characters">
+        <input type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" ng-model-options="{ debounce: 1000 }" placeholder="Search for characters">
         <button type="submit">Search</button>
     </form>
 
