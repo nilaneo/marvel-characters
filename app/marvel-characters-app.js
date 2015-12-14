@@ -12,22 +12,26 @@
             .when('/', {
                 controller: 'MarvelCharactersAppCtrl',
                 controllerAs: 'vm',
-                templateUrl: 'app/marvel-characters-app.html'
+                templateUrl: 'app/marvel-characters-app.html',
+                reloadOnSearch: false
             })
             .otherwise('/');
     });
 
-    module.controller('MarvelCharactersAppCtrl', function(marvelApi) {
+    module.controller('MarvelCharactersAppCtrl', function(marvelApi, $location) {
         var vm = this;
 
-        marvelApi.getCharacters().then(function(characters) {
-            vm.characters = characters;
-        });
+        vm.searchRequest = $location.search().q;
 
         vm.searchCharacters = function() {
             marvelApi.getCharacters(vm.searchRequest).then(function(characters){
                 vm.characters = characters;
             });
-        }
+
+            $location.search('q', vm.searchRequest);
+        };
+
+        vm.searchCharacters();
+
     });
 }());
