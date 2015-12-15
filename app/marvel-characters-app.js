@@ -24,30 +24,47 @@
 
         // Pagination
         vm.itemsPerPageOptions = [5, 10, 20, 50, 100];
-        vm.itemsPerPage = vm.itemsPerPageOptions[1];
-        vm.currentPage = 1;
         vm.maxSize = 5;
+        vm.itemsPerPage = parseInt($location.search().items, 10);
+        vm.currentPage = parseInt($location.search().page, 10);
+        vm.totalItems = vm.currentPage*vm.itemsPerPage;
+        vm.searchRequest = $location.search().q;
 
         vm.resetPagesAndSearch = function() {
             vm.currentPage = 1;
-            vm.searchCharacters();
+            vm.savePageToUrlAndSearch();
         };
 
-        vm.searchRequest = $location.search().q;
+        vm.saveItemsPerPage = function() {
+            $location.search('items', vm.itemsPerPage);
+            vm.resetPagesAndSearch();
+        };
+
 
         vm.searchCharacters = function() {
             marvelApi.getCharacters(vm.searchRequest, vm.itemsPerPage, vm.currentPage).then(function(characters){
                 vm.characters = characters.results;
                 vm.totalItems = characters.total;
             });
-
-            $location.search('q', vm.searchRequest);
         };
+
+        vm.savePageToUrlAndSearch = function() {
+            $location.search('page', vm.currentPage);
+            vm.searchCharacters();
+        };
+
+        var itIsTheFirstRunOfSearchRequestWatcher = true;
 
         $scope.$watch(function() {
             return vm.searchRequest;
         }, function() {
-            vm.resetPagesAndSearch();
+            if (itIsTheFirstRunOfSearchRequestWatcher) {
+                itIsTheFirstRunOfSearchRequestWatcher = false;
+                vm.searchCharacters();
+            } else {
+                $location.search('q', vm.searchRequest);
+                vm.resetPagesAndSearch();
+            }
         });
     });
 }());

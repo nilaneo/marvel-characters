@@ -8,11 +8,11 @@
 
     <h2 ng-if="vm.characters && !vm.characters.length">No search results.</h2>
 
-    <uib-pagination ng-change="vm.searchCharacters()" total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="vm.itemsPerPage"></uib-pagination>
+    <uib-pagination ng-change="vm.savePageToUrlAndSearch()" total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="vm.itemsPerPage"></uib-pagination>
 
     <div>
         <span>View</span>
-        <select ng-model="vm.itemsPerPage" ng-change="vm.resetPagesAndSearch()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions">
+        <select ng-model="vm.itemsPerPage" ng-change="vm.saveItemsPerPage()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions">
 
         </select>
         <span> at a time.</span>
