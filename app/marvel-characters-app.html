@@ -1,5 +1,5 @@
 <div>
-    <form class="form-inline" name="searchForm" ng-submit="vm.searchCharacters()" novalidate>
+    <form class="form-inline" name="searchForm" ng-submit="vm.resetPagesAndSearch()" novalidate>
         <div class="form-group">
             <input class="form-control" type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" ng-model-options="{ debounce: 1000 }" placeholder="Search for characters">
         </div>
@@ -7,6 +7,16 @@
     </form>
 
     <h2 ng-if="vm.characters && !vm.characters.length">No search results.</h2>
+
+    <uib-pagination ng-change="vm.searchCharacters()" total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="vm.itemsPerPage"></uib-pagination>
+
+    <div>
+        <span>View</span>
+        <select ng-model="vm.itemsPerPage" ng-change="vm.resetPagesAndSearch()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions">
+
+        </select>
+        <span> at a time.</span>
+    </div>
 
     <div id="search-results" ng-repeat="character in vm.characters">
     	<marvel-character-info character="character"></marvel-character-info>
