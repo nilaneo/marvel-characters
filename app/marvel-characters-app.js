@@ -60,6 +60,12 @@
         }, function() {
             if (itIsTheFirstRunOfSearchRequestWatcher) {
                 itIsTheFirstRunOfSearchRequestWatcher = false;
+                if(!vm.itemsPerPage && !vm.currentPage) {
+                    vm.itemsPerPage = 10;
+                    vm.currentPage = 1;
+                    $location.search('items', vm.itemsPerPage);
+                    $location.search('page', vm.currentPage);
+                }
                 vm.searchCharacters();
             } else {
                 $location.search('q', vm.searchRequest);
