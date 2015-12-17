@@ -27,6 +27,14 @@
         vm.maxSize = 5;
         vm.itemsPerPage = parseInt($location.search().items, 10);
         vm.currentPage = parseInt($location.search().page, 10);
+        if(isNaN(vm.itemsPerPage) || !vm.itemsPerPageOptions.includes(vm.itemsPerPage)) {
+            vm.itemsPerPage = 10;
+            $location.search('items', vm.itemsPerPage);
+        }
+        if(isNaN(vm.currentPage) || vm.currentPage < 1) {
+            vm.currentPage = 1;
+            $location.search('page', vm.currentPage);
+        }
         vm.totalItems = vm.currentPage*vm.itemsPerPage;
         vm.searchRequest = $location.search().q;
 
@@ -39,7 +47,6 @@
             $location.search('items', vm.itemsPerPage);
             vm.resetPagesAndSearch();
         };
-
 
         vm.searchCharacters = function() {
             marvelApi.getCharacters(vm.searchRequest, vm.itemsPerPage, vm.currentPage).then(function(characters){
