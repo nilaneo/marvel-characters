@@ -27,7 +27,7 @@
         vm.maxSize = 5;
         vm.itemsPerPage = parseInt($location.search().items, 10);
         vm.currentPage = parseInt($location.search().page, 10);
-        if(isNaN(vm.itemsPerPage) || !vm.itemsPerPageOptions.includes(vm.itemsPerPage)) {
+        if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
             vm.itemsPerPage = 10;
             $location.search('items', vm.itemsPerPage);
         }
