@@ -8,15 +8,18 @@
 
     <h2 ng-if="vm.characters && !vm.characters.length">No search results.</h2>
 
-    <uib-pagination ng-if="vm.characters.length" ng-change="vm.savePageToUrlAndSearch()" total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="vm.itemsPerPage"></uib-pagination>
+    <div ng-show="vm.characters.length">
+        <uib-pagination ng-change="vm.savePageToUrlAndSearch()" total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="vm.itemsPerPage"></uib-pagination>
 
-    <div ng-if="vm.characters.length">
-        <span>View</span>
-        <select ng-model="vm.itemsPerPage" ng-change="vm.saveItemsPerPage()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions">
+        <div>
+            <span>View</span>
+            <select ng-model="vm.itemsPerPage" ng-change="vm.saveItemsPerPage()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions">
 
-        </select>
-        <span> at a time.</span>
+            </select>
+            <span> at a time.</span>
+        </div>
     </div>
+
 
     <div id="search-results" ng-repeat="character in vm.characters">
     	<marvel-character-info character="character"></marvel-character-info>
