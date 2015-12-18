@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 
-	var module = angular.module('MarvelCharacterInfo', [
+	var module = angular.module('common.directives.marvelCharacterInfo', [
 
 	]);
 

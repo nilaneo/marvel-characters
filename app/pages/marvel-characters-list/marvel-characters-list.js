@@ -1,7 +1,8 @@
 (function () {
     "use strict";
 
-    var module = angular.module('MarvelCharactersList', [
+    var module = angular.module('pages.marvelCharactersList', [
+        'common.services.marvelApi'
     ]);
 
     module.config(function($routeProvider) {
@@ -21,14 +22,17 @@
         vm.maxSize = 5;
         vm.itemsPerPage = parseInt($location.search().items, 10);
         vm.currentPage = parseInt($location.search().page, 10);
+
         if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
             vm.itemsPerPage = 10;
             $location.search('items', vm.itemsPerPage);
         }
+
         if(isNaN(vm.currentPage) || vm.currentPage < 1) {
             vm.currentPage = 1;
             $location.search('page', vm.currentPage);
         }
+
         vm.totalItems = vm.currentPage*vm.itemsPerPage;
         vm.searchRequest = $location.search().q;
 

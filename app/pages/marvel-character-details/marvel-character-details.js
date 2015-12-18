@@ -1,9 +1,7 @@
 (function(){
     'use strict';
 
-    var module = angular.module('MarvelCharacterDetails', [
-
-    ]);
+    var module = angular.module('pages.marvelCharacterDetails', []);
 
     module.config(function($routeProvider) {
         $routeProvider
@@ -14,8 +12,16 @@
             });
     });
 
-    module.controller('MarvelCharacterDetailsCtrl', function() {
+    module.controller('MarvelCharacterDetailsCtrl', function(marvelApi, $routeParams) {
         var vm = this;
+
+        vm.getCharacter = function() {
+            marvelApi.getCharacter($routeParams.characterId).then(function(character){
+                vm.character = character;
+            });
+        };
+
+        vm.getCharacter();
     });
 
 })();

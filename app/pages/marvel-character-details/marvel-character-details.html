@@ -1,3 +1,23 @@
-<h1>
-    Test test test
-</h1>
+<div class="container">
+    <div class="row" ng-if="vm.character">
+        <div class="col-md-2">
+            <marvel-character-img character="vm.character"></marvel-character-img>
+        </div>
+        <div class="col-md-10">
+            <h2><a href="{{vm.character.urls[0].url}}" target="_blank">{{vm.character.name}}</a></h2>
+            <p class="text-info">
+                {{vm.character.description}}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Comics:</h4>
+            <ul>
+                <li ng-repeat="comic in vm.character.comics.items">
+                    {{comic.name}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
