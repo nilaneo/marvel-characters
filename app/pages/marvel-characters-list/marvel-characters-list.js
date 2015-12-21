@@ -58,18 +58,17 @@
             vm.searchCharacters();
         };
 
-        var itIsTheFirstRunOfSearchRequestWatcher = true;
+        vm.autoGetCharacters = function(name) {
+            var itemsPerSuggestion = 10,
+                startPage = 1;
 
-        $scope.$watch(function() {
-            return vm.searchRequest;
-        }, function() {
-            if (itIsTheFirstRunOfSearchRequestWatcher) {
-                itIsTheFirstRunOfSearchRequestWatcher = false;
-                vm.searchCharacters();
-            } else {
-                $location.search('q', vm.searchRequest);
-                vm.resetPagesAndSearch();
-            }
-        });
+            return marvelApi.getCharacters(name, itemsPerSuggestion, startPage).then(function(characters){
+                return characters.results.map(function(item){
+                    return item.name;
+                });
+            });
+        };
+
+        vm.searchCharacters();
     });
 }());

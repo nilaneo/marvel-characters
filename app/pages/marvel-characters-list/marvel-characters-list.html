@@ -1,7 +1,12 @@
 <div>
     <form class="form-inline" name="searchForm" ng-submit="vm.resetPagesAndSearch()" novalidate>
-        <div class="form-group">
-            <input class="form-control" type="text" id="search-request" name="searchRequest" ng-model="vm.searchRequest" ng-model-options="{ debounce: 1000 }" placeholder="Search for characters">
+        <div class="form-group form-search">
+            <input type="text" ng-model="vm.searchRequest" placeholder="Search for characters" uib-typeahead="name for name in vm.autoGetCharacters($viewValue)" typeahead-loading="loadingCharacters" ng-model-options="{ debounce: 300 }" typeahead-on-select="vm.resetPagesAndSearch()" typeahead-no-results="noResults" class="form-control">
+
+            <i ng-show="loadingCharacters" class="glyphicon glyphicon-refresh"></i>
+            <div ng-show="noResults" class="no-results text-danger">
+              <i class="glyphicon glyphicon-remove"></i> No Results Found
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
     </form>

@@ -29,3 +29,11 @@
 .btn-back {
     margin: 15px 0;
 }
+
+.form-inline .form-group.form-search {
+    vertical-align: top;
+}
+
+.no-results {
+    margin-top: 5px;
+}
