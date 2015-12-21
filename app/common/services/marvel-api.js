@@ -5,14 +5,15 @@
 
     module.factory('marvelApi', function($http) {
         return {
-            getCharacters: function(name, itemsPerPage, currentPage) {
+            getCharacters: function(name, itemsPerPage, currentPage, orderBy) {
                 var offset = (currentPage - 1) * itemsPerPage;
                 return $http.get('http://gateway.marvel.com/v1/public/characters', {
                     params: {
                         apikey: 'e82e1f8eb16da85c0260676f2cdb05b2',
                         limit: itemsPerPage,
                         offset: offset,
-                        nameStartsWith: name ? name : undefined
+                        nameStartsWith: name ? name : undefined,
+                        orderBy: orderBy
                     }
                 }).then(function(response) {
                     return response.data.data;

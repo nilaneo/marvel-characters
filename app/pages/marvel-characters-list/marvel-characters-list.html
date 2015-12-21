@@ -16,13 +16,18 @@
     <div ng-show="vm.characters.length">
         <uib-pagination ng-change="vm.savePageToUrlAndSearch()" total-items="vm.totalItems" ng-model="vm.currentPage" max-size="vm.maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="vm.itemsPerPage"></uib-pagination>
 
-        <div>
-            <span>View</span>
-            <select ng-model="vm.itemsPerPage" ng-change="vm.saveItemsPerPage()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions">
-
-            </select>
-            <span> at a time.</span>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 list-option">
+                <span>View</span>
+                <select ng-model="vm.itemsPerPage" ng-change="vm.saveItemsPerPage()" ng-options="itemsPerPageOption + ' records' for itemsPerPageOption in vm.itemsPerPageOptions"></select>
+                <span> at a time.</span>
+            </div>
+            <div class="col-md-9 col-sm-6 list-option">
+                <span>Order by</span>
+                <select ng-model="vm.orderBy" ng-change="vm.showOrderedItems()" ng-options="orderItemsByOption for orderItemsByOption in vm.orderItemsByOption"></select>
+            </div>
         </div>
+
     </div>
 
     <div class="search-results">

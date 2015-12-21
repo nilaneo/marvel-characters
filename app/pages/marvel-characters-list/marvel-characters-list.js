@@ -19,9 +19,11 @@
         var vm = this;
 
         vm.itemsPerPageOptions = [5, 10, 20, 50, 100];
+        vm.orderItemsByOption = ['name', 'modified'];
         vm.maxSize = 5;
         vm.itemsPerPage = parseInt($location.search().items, 10);
         vm.currentPage = parseInt($location.search().page, 10);
+        vm.orderBy = $location.search().orderBy;
 
         if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
             vm.itemsPerPage = 10;
@@ -31,6 +33,11 @@
         if(isNaN(vm.currentPage) || vm.currentPage < 1) {
             vm.currentPage = 1;
             $location.search('page', vm.currentPage);
+        }
+
+        if(!(vm.orderBy) || !_.includes(vm.orderItemsByOption, vm.orderBy)) {
+            vm.orderBy = 'name';
+            $location.search('orderBy', vm.orderBy);
         }
 
         vm.totalItems = vm.currentPage*vm.itemsPerPage;
@@ -46,8 +53,13 @@
             vm.resetPagesAndSearch();
         };
 
+        vm.showOrderedItems = function() {
+            $location.search('orderBy', vm.orderBy);
+            vm.resetPagesAndSearch();
+        }
+
         vm.searchCharacters = function() {
-            marvelApi.getCharacters(vm.searchRequest, vm.itemsPerPage, vm.currentPage).then(function(characters){
+            marvelApi.getCharacters(vm.searchRequest, vm.itemsPerPage, vm.currentPage, vm.orderBy).then(function(characters){
                 vm.characters = characters.results;
                 vm.totalItems = characters.total;
             });
