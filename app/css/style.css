@@ -1,0 +1,31 @@
+.search-results {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 -15px;
+}
+
+.search-result {
+    width: 150px;
+    height: 200px;
+    margin: 15px;
+}
+
+.img-character {
+    width: auto;
+    height: 150px;
+}
+
+.search-result-link {
+    display: block;
+    text-align: center;
+}
+
+.search-result-name {
+    margin-top: 10px;
+}
+
+.btn-back {
+    margin: 15px 0;
+}

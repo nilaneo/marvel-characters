@@ -20,9 +20,10 @@
         </div>
     </div>
 
-    <div id="search-results" ng-repeat="character in vm.characters">
-    	<marvel-character-info character="character"></marvel-character-info>
-    	<hr/>
+    <div class="search-results">
+        <div class="search-result" ng-repeat="character in vm.characters">
+        	<marvel-character-info character="character"></marvel-character-info>
+        </div>
     </div>
 </div>
 

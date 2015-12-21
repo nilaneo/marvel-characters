@@ -1,4 +1,8 @@
 <div>
-    <a href="#/characters/{{vm.character.id}}">{{vm.character.name}}</a>
-    <marvel-character-img character="vm.character"></marvel-character-img>
+    <a class="search-result-link" href="#/characters/{{vm.character.id}}">
+        <figure>
+            <marvel-character-img character="vm.character"></marvel-character-img>
+            <figcaption class="search-result-name">{{vm.character.name}}</figcaption>
+        </figure>
+    </a>
 </div>
