@@ -15,15 +15,24 @@
             });
     });
 
-    module.controller('MarvelCharactersAppCtrl', function(marvelApi, $location, $scope) {
+    module.controller('MarvelCharactersAppCtrl', MarvelCharactersAppCtrl);
+
+    function MarvelCharactersAppCtrl(marvelApi, $location, $scope) {
         var vm = this;
 
-        vm.itemsPerPageOptions = [5, 10, 20, 50, 100];
+        vm.itemsPerPageOptions = [10, 15, 20, 30, 50, 100];
         vm.orderItemsByOption = ['name', 'modified'];
         vm.maxSize = 5;
         vm.itemsPerPage = parseInt($location.search().items, 10);
         vm.currentPage = parseInt($location.search().page, 10);
         vm.orderBy = $location.search().orderBy;
+
+        vm.autoGetCharacters = autoGetCharacters;
+        vm.resetPagesAndSearch = resetPagesAndSearch;
+        vm.saveItemsPerPage = saveItemsPerPage;
+        vm.showOrderedItems = showOrderedItems;
+        vm.searchCharacters = searchCharacters;
+        vm.savePageToUrlAndSearch = savePageToUrlAndSearch;
 
         if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
             vm.itemsPerPage = 10;
@@ -43,34 +52,42 @@
         vm.totalItems = vm.currentPage*vm.itemsPerPage;
         vm.searchRequest = $location.search().q;
 
-        vm.resetPagesAndSearch = function() {
+        activate();
+
+        ////////////
+
+        function activate() {
+            vm.searchCharacters();
+        };
+
+        function resetPagesAndSearch() {
             vm.currentPage = 1;
-            vm.savePageToUrlAndSearch();
+            savePageToUrlAndSearch();
         };
 
-        vm.saveItemsPerPage = function() {
+        function saveItemsPerPage() {
             $location.search('items', vm.itemsPerPage);
-            vm.resetPagesAndSearch();
+            resetPagesAndSearch();
         };
 
-        vm.showOrderedItems = function() {
+        function showOrderedItems() {
             $location.search('orderBy', vm.orderBy);
-            vm.resetPagesAndSearch();
+            resetPagesAndSearch();
         }
 
-        vm.searchCharacters = function() {
+        function searchCharacters() {
             marvelApi.getCharacters(vm.searchRequest, vm.itemsPerPage, vm.currentPage, vm.orderBy).then(function(characters){
                 vm.characters = characters.results;
                 vm.totalItems = characters.total;
             });
         };
 
-        vm.savePageToUrlAndSearch = function() {
+        function savePageToUrlAndSearch() {
             $location.search('page', vm.currentPage);
-            vm.searchCharacters();
+            searchCharacters();
         };
 
-        vm.autoGetCharacters = function(name) {
+        function autoGetCharacters(name) {
             var itemsPerSuggestion = 10,
                 startPage = 1;
 
@@ -80,7 +97,5 @@
                 });
             });
         };
-
-        vm.searchCharacters();
-    });
+    };
 }());

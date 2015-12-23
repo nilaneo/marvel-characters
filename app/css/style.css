@@ -7,14 +7,14 @@
 }
 
 .search-result {
-    width: 150px;
-    height: 200px;
+    width: 200px;
+    height: 240px;
     margin: 15px;
 }
 
 .img-character {
     width: auto;
-    height: 150px;
+    height: 200px;
 }
 
 .search-result-link {
@@ -39,5 +39,5 @@
 }
 
 .list-option {
-    margin-bottom: 15px;
+    margin: 15px 0;
 }

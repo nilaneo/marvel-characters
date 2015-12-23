@@ -12,16 +12,23 @@
             });
     });
 
-    module.controller('MarvelCharacterDetailsCtrl', function(marvelApi, $routeParams) {
+    module.controller('MarvelCharacterDetailsCtrl', MarvelCharacterDetailsCtrl);
+
+    function MarvelCharacterDetailsCtrl(marvelApi, $routeParams) {
         var vm = this;
 
-        vm.getCharacter = function() {
+        vm.getCharacter = getCharacter;
+
+        vm.getCharacter();
+
+        ////////////
+
+        function getCharacter() {
             marvelApi.getCharacter($routeParams.characterId).then(function(character){
                 vm.character = character;
             });
         };
 
-        vm.getCharacter();
-    });
+    };
 
 })();
