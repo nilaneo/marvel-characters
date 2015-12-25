@@ -22,12 +22,6 @@
 
     module.controller('MarvelCharacterInfoCtrl', function($scope) {
         var vm = this;
-
-        vm.thumbnailUrl = thumbnailUrl;
-
-        function thumbnailUrl() {
-            return vm.character.thumbnail.path + '.' + vm.character.thumbnail.extension;
-        }
     });
 
 })();
