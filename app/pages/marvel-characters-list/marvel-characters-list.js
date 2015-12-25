@@ -5,7 +5,11 @@
         'common.services.marvelApi'
     ]);
 
-    module.config(function($routeProvider) {
+    module
+        .config(_configure)
+        .controller('MarvelCharactersAppCtrl', MarvelCharactersAppCtrl);
+
+    function _configure($routeProvider) {
         $routeProvider
             .when('/characters', {
                 controller: 'MarvelCharactersAppCtrl',
@@ -13,19 +17,23 @@
                 templateUrl: 'app/pages/marvel-characters-list/marvel-characters-list.html',
                 reloadOnSearch: false
             });
-    });
-
-    module.controller('MarvelCharactersAppCtrl', MarvelCharactersAppCtrl);
+    }
 
     function MarvelCharactersAppCtrl(marvelApi, $location, $scope) {
         var vm = this;
 
+        var DEFAULT_PAGE = 1,
+            DEFAULT_ITEMS_PER_PAGE = 10,
+            DEFAULT_ORDER_BY = 'name';
+
         vm.itemsPerPageOptions = [10, 15, 20, 30, 50, 100];
         vm.orderItemsByOption = ['name', 'modified'];
         vm.maxSize = 5;
-        vm.itemsPerPage = parseInt($location.search().items, 10);
-        vm.currentPage = parseInt($location.search().page, 10);
-        vm.orderBy = $location.search().orderBy;
+        vm.itemsPerPage = _getInitialItemsPerPage();
+        vm.currentPage = _getInitialCurrentPage();
+        vm.orderBy = _getInitialOrderBy();
+        vm.totalItems = vm.currentPage*vm.itemsPerPage;
+        vm.searchRequest = $location.search().q;
 
         vm.autoGetCharacters = autoGetCharacters;
         vm.resetPagesAndSearch = resetPagesAndSearch;
@@ -34,31 +42,10 @@
         vm.searchCharacters = searchCharacters;
         vm.savePageToUrlAndSearch = savePageToUrlAndSearch;
 
-        if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
-            vm.itemsPerPage = 10;
-            $location.search('items', vm.itemsPerPage);
-        }
 
-        if(isNaN(vm.currentPage) || vm.currentPage < 1) {
-            vm.currentPage = 1;
-            $location.search('page', vm.currentPage);
-        }
-
-        if(!(vm.orderBy) || !_.includes(vm.orderItemsByOption, vm.orderBy)) {
-            vm.orderBy = 'name';
-            $location.search('orderBy', vm.orderBy);
-        }
-
-        vm.totalItems = vm.currentPage*vm.itemsPerPage;
-        vm.searchRequest = $location.search().q;
-
-        activate();
+        _activate();
 
         ////////////
-
-        function activate() {
-            vm.searchCharacters();
-        };
 
         function resetPagesAndSearch() {
             vm.currentPage = 1;
@@ -96,6 +83,40 @@
                     return item.name;
                 });
             });
+        };
+
+        function _getInitialItemsPerPage() {
+            var itemsPerPage = parseInt($location.search().items, 10);
+
+            if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
+                return DEFAULT_ITEMS_PER_PAGE;
+            } else {
+                return itemsPerPage;
+            }
+        };
+
+        function _getInitialCurrentPage() {
+            var page = parseInt($location.search().page, 10);
+
+            if(isNaN(page) || page < 1) {
+                return DEFAULT_PAGE;
+            } else {
+                return page;
+            }
+        };
+
+        function _getInitialOrderBy() {
+            var orderBy = $location.search().orderBy;
+
+            if(!(vm.orderBy) || !_.includes(vm.orderItemsByOption, vm.orderBy)) {
+                return DEFAULT_ORDER_BY;
+            } else {
+                return orderBy;
+            }
+        };
+
+        function _activate() {
+            vm.searchCharacters();
         };
     };
 }());

@@ -12,13 +12,11 @@
         'pages.marvelCharacterDetails'
     ]);
 
-    module.config(configure);
-
-    configure.$inject = ['$routeProvider'];
+    module.config(_configure);
 
     ////////////////
 
-    function configure($routeProvider) {
+    function _configure($routeProvider) {
         $routeProvider.otherwise('/characters');
     }
 })();

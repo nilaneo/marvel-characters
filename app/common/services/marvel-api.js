@@ -6,13 +6,13 @@
     module.factory('marvelApi', marvelApi);
 
     function marvelApi($http) {
+        var API_URL = 'http://gateway.marvel.com/v1/public/characters',
+            API_KEY = 'e82e1f8eb16da85c0260676f2cdb05b2';
+
         var service = {
             getCharacters: getCharacters,
             getCharacter: getCharacter
         };
-
-        var API_URL = 'http://gateway.marvel.com/v1/public/characters',
-            API_KEY = 'e82e1f8eb16da85c0260676f2cdb05b2';
 
         return service;
 

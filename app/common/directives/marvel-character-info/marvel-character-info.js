@@ -5,6 +5,10 @@
 
     module.directive('marvelCharacterInfo', marvelCharacterInfo);
 
+    module.controller('MarvelCharacterInfoCtrl', function($scope) {
+        var vm = this;
+    });
+
     function marvelCharacterInfo() {
         var directive = {
             restrict: 'E',
@@ -19,9 +23,5 @@
 
         return directive;
     };
-
-    module.controller('MarvelCharacterInfoCtrl', function($scope) {
-        var vm = this;
-    });
 
 })();

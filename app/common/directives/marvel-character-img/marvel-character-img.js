@@ -7,6 +7,8 @@
 
     module.directive('marvelCharacterImg', marvelCharacterImg);
 
+    module.controller('MarvelCharacterImgCtrl', MarvelCharacterImgCtrl);
+
     function marvelCharacterImg() {
         var directive = {
             restrict: 'E',
@@ -22,7 +24,7 @@
         return directive;
     };
 
-    module.controller('MarvelCharacterImgCtrl', function($scope) {
+    function MarvelCharacterImgCtrl($scope) {
         var vm = this;
 
         vm.getThumbnailUrl = getThumbnailUrl;
@@ -30,6 +32,6 @@
         function getThumbnailUrl() {
             return vm.character.thumbnail.path + '.' + vm.character.thumbnail.extension;
         }
+    };
 
-    });
 })();

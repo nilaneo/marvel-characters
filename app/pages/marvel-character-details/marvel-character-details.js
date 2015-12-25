@@ -3,27 +3,27 @@
 
     var module = angular.module('pages.marvelCharacterDetails', []);
 
-    module.config(function($routeProvider) {
+    module
+        .config(_configure)
+        .controller('MarvelCharacterDetailsCtrl', MarvelCharacterDetailsCtrl);
+
+    function _configure($routeProvider) {
         $routeProvider
             .when('/characters/:characterId', {
                 controller: 'MarvelCharacterDetailsCtrl',
                 controllerAs: 'vm',
                 templateUrl: 'app/pages/marvel-character-details/marvel-character-details.html'
             });
-    });
-
-    module.controller('MarvelCharacterDetailsCtrl', MarvelCharacterDetailsCtrl);
+    }
 
     function MarvelCharacterDetailsCtrl(marvelApi, $routeParams) {
         var vm = this;
 
-        vm.getCharacter = getCharacter;
-
-        vm.getCharacter();
+        _activate();
 
         ////////////
 
-        function getCharacter() {
+        function _activate() {
             marvelApi.getCharacter($routeParams.characterId).then(function(character){
                 vm.character = character;
             });
