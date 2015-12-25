@@ -88,10 +88,10 @@
         };
 
         function autoGetCharacters(name) {
-            var itemsPerSuggestion = 10,
-                startPage = 1;
+            var ITEMS_PER_PAGE = 10,
+                START_PAGE = 1;
 
-            return marvelApi.getCharacters(name, itemsPerSuggestion, startPage).then(function(characters){
+            return marvelApi.getCharacters(name, ITEMS_PER_PAGE, START_PAGE).then(function(characters){
                 return characters.results.map(function(item){
                     return item.name;
                 });

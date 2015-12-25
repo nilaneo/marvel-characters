@@ -6,23 +6,23 @@
     module.factory('marvelApi', marvelApi);
 
     function marvelApi($http) {
-        var factory = {
+        var service = {
             getCharacters: getCharacters,
             getCharacter: getCharacter
         };
 
-        var apiUrl = 'http://gateway.marvel.com/v1/public/characters',
-            apikey = 'e82e1f8eb16da85c0260676f2cdb05b2';
+        var API_URL = 'http://gateway.marvel.com/v1/public/characters',
+            API_KEY = 'e82e1f8eb16da85c0260676f2cdb05b2';
 
-        return factory;
+        return service;
 
         ////////////
 
         function getCharacters(name, itemsPerPage, currentPage, orderBy) {
             var offset = (currentPage - 1) * itemsPerPage;
-            return $http.get(apiUrl, {
+            return $http.get(API_URL, {
                 params: {
-                    apikey: apikey,
+                    apikey: API_KEY,
                     limit: itemsPerPage,
                     offset: offset,
                     nameStartsWith: name ? name : undefined,
@@ -34,9 +34,9 @@
         };
 
         function getCharacter(id) {
-            return $http.get(apiUrl + '/' + id, {
+            return $http.get(API_URL + '/' + id, {
                 params: {
-                    apikey: apikey
+                    apikey: API_KEY
                 }
             }).then(function(response) {
                 return response.data.data.results[0];
