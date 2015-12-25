@@ -1,33 +1,33 @@
 (function(){
-	'use strict';
+    'use strict';
 
-	var module = angular.module('common.directives.marvelCharacterInfo', []);
+    var module = angular.module('common.directives.marvelCharacterInfo', []);
 
-	module.directive('marvelCharacterInfo', marvelCharacterInfo);
+    module.directive('marvelCharacterInfo', marvelCharacterInfo);
 
-	function marvelCharacterInfo() {
-		var directive = {
-			restrict: 'E',
-			templateUrl: 'app/common/directives/marvel-character-info/marvel-character-info.html',
-			bindToController: true,
-			scope: {
-				character: '='
-			},
-			controller: 'MarvelCharacterInfoCtrl',
-			controllerAs: 'vm'
-		};
+    function marvelCharacterInfo() {
+        var directive = {
+            restrict: 'E',
+            templateUrl: 'app/common/directives/marvel-character-info/marvel-character-info.html',
+            bindToController: true,
+            scope: {
+                character: '='
+            },
+            controller: 'MarvelCharacterInfoCtrl',
+            controllerAs: 'vm'
+        };
 
-		return directive;
-	};
+        return directive;
+    };
 
-	module.controller('MarvelCharacterInfoCtrl', function($scope) {
-		var vm = this;
+    module.controller('MarvelCharacterInfoCtrl', function($scope) {
+        var vm = this;
 
-		function thumbnailUrl() {
-			return vm.character.thumbnail.path + '.' + vm.character.thumbnail.extension;
-		}
+        vm.thumbnailUrl = thumbnailUrl;
 
-		vm.thumbnailUrl = thumbnailUrl;
-	});
+        function thumbnailUrl() {
+            return vm.character.thumbnail.path + '.' + vm.character.thumbnail.extension;
+        }
+    });
 
 })();

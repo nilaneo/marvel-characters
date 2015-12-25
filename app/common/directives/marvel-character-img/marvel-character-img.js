@@ -24,6 +24,7 @@
 
     module.controller('MarvelCharacterImgCtrl', function($scope) {
         var vm = this;
+
         vm.thumbnailUrl = thumbnailUrl;
 
         function thumbnailUrl() {
