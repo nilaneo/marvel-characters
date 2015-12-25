@@ -10,6 +10,7 @@
     <body>
         <div class="container">
             <h1>Marvel Characters</h1>
+            <h2 ng-if="vm.error" class="text-danger">Something is wrong. Please try later.</h2>
             <ng-view></ng-view>
             <footer>Data provided by Marvel. © 2015 MARVEL</footer>
         </div>

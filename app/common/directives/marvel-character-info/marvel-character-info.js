@@ -5,9 +5,7 @@
 
     module.directive('marvelCharacterInfo', marvelCharacterInfo);
 
-    module.controller('MarvelCharacterInfoCtrl', function($scope) {
-        var vm = this;
-    });
+    module.controller('MarvelCharacterInfoCtrl', MarvelCharacterInfoCtrl);
 
     function marvelCharacterInfo() {
         var directive = {
@@ -22,6 +20,10 @@
         };
 
         return directive;
+    };
+
+    function MarvelCharacterInfoCtrl() {
+        var vm = this;
     };
 
 })();

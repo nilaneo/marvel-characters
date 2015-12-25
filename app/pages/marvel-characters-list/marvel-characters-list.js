@@ -6,10 +6,10 @@
     ]);
 
     module
-        .config(_configure)
+        .config(configure)
         .controller('MarvelCharactersAppCtrl', MarvelCharactersAppCtrl);
 
-    function _configure($routeProvider) {
+    function configure($routeProvider) {
         $routeProvider
             .when('/characters', {
                 controller: 'MarvelCharactersAppCtrl',
@@ -26,6 +26,8 @@
             DEFAULT_ITEMS_PER_PAGE = 10,
             DEFAULT_ORDER_BY = 'name';
 
+
+        vm.error = false;
         vm.itemsPerPageOptions = [10, 15, 20, 30, 50, 100];
         vm.orderItemsByOption = ['name', 'modified'];
         vm.maxSize = 5;
@@ -63,9 +65,12 @@
         }
 
         function searchCharacters() {
+            vm.error = false;
             marvelApi.getCharacters(vm.searchRequest, vm.itemsPerPage, vm.currentPage, vm.orderBy).then(function(characters){
                 vm.characters = characters.results;
                 vm.totalItems = characters.total;
+            }, function() {
+                vm.error = true;
             });
         };
 

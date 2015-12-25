@@ -12,11 +12,11 @@
         'pages.marvelCharacterDetails'
     ]);
 
-    module.config(_configure);
+    module.config(configure);
 
     ////////////////
 
-    function _configure($routeProvider) {
+    function configure($routeProvider) {
         $routeProvider.otherwise('/characters');
     }
 })();

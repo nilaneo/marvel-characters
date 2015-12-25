@@ -11,7 +11,8 @@
         <button type="submit" class="btn btn-primary">Search</button>
     </form>
 
-    <h2 ng-if="vm.characters && !vm.characters.length">No search results.</h2>
+    <h2 ng-if="vm.characters && !vm.characters.length" class="text-info">No search results.</h2>
+    <h2 ng-if="vm.error" class="text-danger">Something is wrong. Please try later.</h2>
 
     <div ng-show="vm.characters.length">
         <div class="row">
