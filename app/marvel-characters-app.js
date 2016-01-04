@@ -18,5 +18,5 @@
 
     function configure($routeProvider) {
         $routeProvider.otherwise('/characters');
-    }
+    };
 })();
