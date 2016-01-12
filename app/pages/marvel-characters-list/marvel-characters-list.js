@@ -8,19 +8,19 @@
 
     module
         .config(configure)
-        .controller('MarvelCharactersAppCtrl', MarvelCharactersAppCtrl);
+        .controller('MarvelCharactersListCtrl', MarvelCharactersListCtrl);
 
     function configure($routeProvider) {
         $routeProvider
             .when('/characters', {
-                controller: 'MarvelCharactersAppCtrl',
+                controller: 'MarvelCharactersListCtrl',
                 controllerAs: 'vm',
                 templateUrl: 'app/pages/marvel-characters-list/marvel-characters-list.html',
                 reloadOnSearch: false
             });
     }
 
-    function MarvelCharactersAppCtrl(marvelApi, $location, $scope) {
+    function MarvelCharactersListCtrl(marvelApi, $location) {
         var vm = this;
 
         var DEFAULT_PAGE = 1,
@@ -38,6 +38,7 @@
         vm.totalItems = vm.currentPage*vm.itemsPerPage;
         vm.searchRequest = $location.search().q;
 
+        vm.activate = activate;
         vm.autoGetCharacters = autoGetCharacters;
         vm.resetPagesAndSearch = resetPagesAndSearch;
         vm.saveItemsPerPage = saveItemsPerPage;
@@ -45,10 +46,11 @@
         vm.searchCharacters = searchCharacters;
         vm.savePageToUrlAndSearch = savePageToUrlAndSearch;
 
-
-        _activate();
-
         ////////////
+
+        function activate() {
+            searchCharacters();
+        };
 
         function resetPagesAndSearch() {
             vm.currentPage = 1;
@@ -119,10 +121,6 @@
             } else {
                 return orderBy;
             }
-        };
-
-        function _activate() {
-            vm.searchCharacters();
         };
     };
 }());

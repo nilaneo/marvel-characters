@@ -1,4 +1,4 @@
-<div>
+<div ng-init="vm.activate()">
     <form class="form-inline" name="searchForm" ng-submit="vm.resetPagesAndSearch()" novalidate>
         <div class="form-group form-search">
             <input type="text" ng-model="vm.searchRequest" placeholder="Search for characters" uib-typeahead="name for name in vm.autoGetCharacters($viewValue)" typeahead-loading="loadingCharacters" ng-model-options="{ debounce: 300 }" typeahead-on-select="vm.resetPagesAndSearch()" typeahead-no-results="noResults" class="form-control">
