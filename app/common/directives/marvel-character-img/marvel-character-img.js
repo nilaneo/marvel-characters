@@ -24,7 +24,7 @@
         return directive;
     };
 
-    function MarvelCharacterImgCtrl($scope) {
+    function MarvelCharacterImgCtrl() {
         var vm = this;
 
         vm.getThumbnailUrl = getThumbnailUrl;
