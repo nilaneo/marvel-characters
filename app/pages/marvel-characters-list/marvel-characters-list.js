@@ -2,6 +2,7 @@
     "use strict";
 
     var module = angular.module('pages.marvelCharactersList', [
+        'ngRoute',
         'common.services.marvelApi'
     ]);
 

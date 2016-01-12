@@ -1,7 +1,10 @@
 (function(){
     'use strict';
 
-    var module = angular.module('pages.marvelCharacterDetails', []);
+    var module = angular.module('pages.marvelCharacterDetails', [
+        'ngRoute',
+        'common.services.marvelApi'
+    ]);
 
     module
         .config(configure)
@@ -26,14 +29,11 @@
         ////////////
 
         function _activate() {
-            vm.error = false;
             marvelApi.getCharacter($routeParams.characterId).then(function(character){
                 vm.character = character;
             }, function() {
                 vm.error = true;
             });
         };
-
     };
-
 })();
