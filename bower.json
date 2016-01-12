@@ -1,0 +1,23 @@
+{
+  "name": "marvel-characters",
+  "description": "",
+  "main": "dist/marvel-characters-app.js",
+  "authors": [
+    "nilaneo"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
