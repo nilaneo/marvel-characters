@@ -9,11 +9,24 @@ gulp.task('clean', function() {
     return del('dist');
 });
 
-gulp.task('build', ['clean'], function () {
+gulp.task('build-js', ['clean'], function () {
     return gulp.src('app/**/*.js')
         .pipe(ngAnnotate())
         .pipe(uglify())
         .pipe(concat('marvel-characters-app.js'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['build-js', 'concat-vendor']);
+
+gulp.task('concat-vendor', ['clean'], function () {
+    return gulp.src([
+            'bower_components/angular/angular.min.js',
+            'bower_components/angular-route/angular-route.min.js',
+            'bower_components/lodash/lodash.min.js',
+            'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
+        ])
+        .pipe(concat('marvel-characters-vendor.js'))
         .pipe(gulp.dest('dist'));
 });
 

@@ -19,5 +19,12 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.6",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "lodash": "~3.10.1",
+    "angular-bootstrap": "~1.0.3"
+  }
 }
