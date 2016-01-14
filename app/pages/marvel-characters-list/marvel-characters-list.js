@@ -49,22 +49,22 @@
         ////////////
 
         function activate() {
-            searchCharacters();
+            vm.searchCharacters();
         };
 
         function resetPagesAndSearch() {
             vm.currentPage = 1;
-            savePageToUrlAndSearch();
+            vm.savePageToUrlAndSearch();
         };
 
         function saveItemsPerPage() {
             $location.search('items', vm.itemsPerPage);
-            resetPagesAndSearch();
+            vm.resetPagesAndSearch();
         };
 
         function showOrderedItems() {
             $location.search('orderBy', vm.orderBy);
-            resetPagesAndSearch();
+            vm.resetPagesAndSearch();
         }
 
         function searchCharacters() {
@@ -79,7 +79,7 @@
 
         function savePageToUrlAndSearch() {
             $location.search('page', vm.currentPage);
-            searchCharacters();
+            vm.searchCharacters();
         };
 
         function autoGetCharacters(name) {
@@ -96,7 +96,7 @@
         function _getInitialItemsPerPage() {
             var itemsPerPage = parseInt($location.search().items, 10);
 
-            if(isNaN(vm.itemsPerPage) || !_.includes(vm.itemsPerPageOptions, vm.itemsPerPage)) {
+            if(isNaN(itemsPerPage) || !_.includes(vm.itemsPerPageOptions, itemsPerPage)) {
                 return DEFAULT_ITEMS_PER_PAGE;
             } else {
                 return itemsPerPage;
@@ -116,7 +116,7 @@
         function _getInitialOrderBy() {
             var orderBy = $location.search().orderBy;
 
-            if(!(vm.orderBy) || !_.includes(vm.orderItemsByOption, vm.orderBy)) {
+            if(!(orderBy) || !_.includes(vm.orderItemsByOption, orderBy)) {
                 return DEFAULT_ORDER_BY;
             } else {
                 return orderBy;
